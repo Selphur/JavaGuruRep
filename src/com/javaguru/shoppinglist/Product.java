@@ -8,7 +8,7 @@ public class Product {
     private String name;
     private BigDecimal price;
     private String category;
-    private int discount;
+    private BigDecimal discount;
     private String description;
 
     public Long getId() {
@@ -24,11 +24,7 @@ public class Product {
     }
 
     public void setName(String name) {
-        if(name.length() >= 3 && name.length() <= 32) {
-            this.name = name;
-        } else {
-            System.out.println("Error: the name must be netween 3 and 32 characters long");
-        }
+        this.name = name;
     }
 
     public BigDecimal getPrice() {
@@ -36,11 +32,7 @@ public class Product {
     }
 
     public void setPrice(BigDecimal price) {
-        if(price.compareTo(new BigDecimal(0)) == 1) {
-            this.price = price;
-        } else {
-            System.out.println("Error: the price must be higher than 0");
-        }
+        this.price = price;
     }
 
     public String getCategory() {
@@ -51,16 +43,12 @@ public class Product {
         this.category = category;
     }
 
-    public int getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(int discount) {
-        if(discount >= 0 && discount <= 100) {
-            this.discount = discount;
-        } else {
-            System.out.println("Error: the discount must be between 0 and 100");
-        }
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
     }
 
     public String getDescription() {
