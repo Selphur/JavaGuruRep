@@ -32,6 +32,22 @@ class ShoppingListApplication {
                     stepProceed = false;
 
                     do {
+                        System.out.println("Enter product category: ");
+                        String category = scanner.nextLine();
+                        product.setCategory(category);
+                        stepProceed = true;
+                    } while(!stepProceed);
+                    stepProceed = false;
+
+                    do {
+                        System.out.println("Enter product description: ");
+                        String description = scanner.nextLine();
+                        product.setDescription(description);
+                        stepProceed = true;
+                    } while(!stepProceed);
+                    stepProceed = false;
+
+                    do {
                         System.out.println("Enter product price (more than 0): ");
                         BigDecimal price = new BigDecimal(scanner.nextLine());
                         if (productValidator.validatePrice(price)) {

@@ -22,7 +22,7 @@ public class ProductValidator {
     }
 
     public boolean validateDiscount(BigDecimal discount) {
-        if((discount.compareTo(new BigDecimal(0)) == 1 || discount.compareTo(new BigDecimal(0)) == 0) && (discount.compareTo(new BigDecimal(100)) == -1) || discount.compareTo(new BigDecimal(100)) == 0) {
+        if((discount.compareTo(new BigDecimal(0)) != -1) && (discount.compareTo(new BigDecimal(100)) != 1)) {
             return true;
         } else {
             new ValidationException("The discount must be between 0 and 100. Please try again.");
