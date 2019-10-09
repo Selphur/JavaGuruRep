@@ -4,11 +4,13 @@ import java.math.BigDecimal;
 
 public class ProductValidator {
 
-    private int nameLengthMin = 3;
-    private int nameLengthMax = 32;
-    private BigDecimal priceMin = new BigDecimal(0);
-    private BigDecimal discountMin = new BigDecimal(0);
-    private BigDecimal discountMax = new BigDecimal(100);
+    ProductValidParameters productValidParameters = new ProductValidParameters();
+
+    private int nameLengthMin = productValidParameters.getNameLengthMin();
+    private int nameLengthMax = productValidParameters.getNameLengthMax();
+    private BigDecimal priceMin = productValidParameters.getPriceMin();
+    private BigDecimal discountMin = productValidParameters.getDiscountMin();
+    private BigDecimal discountMax = productValidParameters.getDiscountMax();
 
     public int getNameLengthMin() {
         return nameLengthMin;
@@ -34,7 +36,7 @@ public class ProductValidator {
         if(name.length() >= nameLengthMin && name.length() <= nameLengthMax) {
             return true;
         } else {
-            new ValidationException("The name must be between 3 and 32 characters long. Please try again.");
+            new ValidationException("The name must be between " + nameLengthMin + " and " + nameLengthMax + " characters long. Please try again.");
             return false;
         }
     }
@@ -43,7 +45,7 @@ public class ProductValidator {
         if(price.compareTo(priceMin) == 1) {
             return true;
         } else {
-            new ValidationException("The price must be higher than 0. Please try again.");
+            new ValidationException("The price must be higher than " + priceMin + ". Please try again.");
             return false;
         }
     }
@@ -52,7 +54,7 @@ public class ProductValidator {
         if((discount.compareTo(discountMin) != -1) && (discount.compareTo(discountMax) != 1)) {
             return true;
         } else {
-            new ValidationException("The discount must be between 0 and 100. Please try again.");
+            new ValidationException("The discount must be between " + discountMin + " and " + discountMax + ". Please try again.");
             return false;
         }
     }

@@ -1,15 +1,12 @@
 package com.javaguru.shoppinglist;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 class ShoppingListApplication {
 
     public static void main(String[] args) {
-        Map<Long, Product> productRepository = new HashMap<>();
-        Long productIdSequence = 0L;
+        ProductRepository productRepository = new ProductRepository();
         ProductValidator productValidator = new ProductValidator();
         Ui ui = new Ui();
         while (true) {
@@ -65,16 +62,13 @@ class ShoppingListApplication {
                         }
                     } while(!stepProceed);
 
-                    product.setId(productIdSequence);
-                    productRepository.put(productIdSequence, product);
-                    productIdSequence++;
-                    System.out.println("The product has been created. It's ID is " + product.getId());
+                    productRepository.saveProduct(product);
+                    ui.messageSuccess(product.getId());
                     break;
                 case 2:
                     System.out.println("Enter product id: ");
                     long id = scanner.nextLong();
-                    Product findProductResult = productRepository.get(id);
-                    System.out.println(findProductResult);
+                    System.out.println(productRepository.getProduct(id));
                     break;
                 case 3:
                     return;
