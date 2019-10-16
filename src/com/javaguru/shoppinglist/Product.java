@@ -11,6 +11,12 @@ public class Product {
     private BigDecimal discount;
     private String description;
 
+    static final int nameLengthMin = 3;
+    static final int nameLengthMax = 32;
+    static final BigDecimal priceMin = new BigDecimal(0);
+    static final BigDecimal discountMin = new BigDecimal(0);
+    static final BigDecimal discountMax = new BigDecimal(100);
+
     public Long getId() {
         return id;
     }

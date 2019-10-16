@@ -10,6 +10,8 @@ public class ProductRepository {
     public void saveProduct(Product product) {
         product.setId(productIdSequence);
         productRepository.put(productIdSequence, product);
+        String success = "The product has been created. It's ID is ";
+        System.out.println(success + product.getId());
         productIdSequence++;
     }
 

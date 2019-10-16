@@ -7,13 +7,11 @@ public class Ui {
             "Type 3 to exit"
     };
 
-    private ProductValidParameters productValidParameters = new ProductValidParameters();
-    private String enterName = "Enter product name (" + productValidParameters.getNameLengthMin() + " to " + productValidParameters.getNameLengthMax() + " characters): ";
+    private String enterName = "Enter product name (" + Product.nameLengthMin + " to " + Product.nameLengthMax + " characters): ";
     private String enterCategory = "Enter product category: ";
     private String enterDescription = "Enter product description: ";
-    private String enterPrice = "Enter product price (more than " + productValidParameters.getPriceMin() + "): ";
-    private String enterDiscount = "Enter product discount (" + productValidParameters.getDiscountMin() + " to " + productValidParameters.getDiscountMax() + ", decimals separated by comma): ";
-    private String success = "The product has been created. It's ID is ";
+    private String enterPrice = "Enter product price (more than " + Product.priceMin + "): ";
+    private String enterDiscount = "Enter product discount (" + Product.discountMin + " to " + Product.discountMax + ", decimals separated by comma): ";
 
     public void messageActions() {
         for (String message : actions) {
@@ -39,9 +37,5 @@ public class Ui {
 
     public void messageEnterDiscount() {
         System.out.println(enterDiscount);
-    }
-
-    public void messageSuccess(Long id) {
-        System.out.println(success + id);
     }
 }

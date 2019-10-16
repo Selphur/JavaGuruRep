@@ -63,7 +63,6 @@ class ShoppingListApplication {
                     } while(!stepProceed);
 
                     productRepository.saveProduct(product);
-                    ui.messageSuccess(product.getId());
                     break;
                 case 2:
                     System.out.println("Enter product id: ");
