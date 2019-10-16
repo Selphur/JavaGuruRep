@@ -1,6 +1,7 @@
 package com.javaguru.shoppinglist;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Product {
 
@@ -14,6 +15,7 @@ public class Product {
     static final int nameLengthMin = 3;
     static final int nameLengthMax = 32;
     static final BigDecimal priceMin = new BigDecimal(0);
+    static final BigDecimal priceMinForDiscount = new BigDecimal(20);
     static final BigDecimal discountMin = new BigDecimal(0);
     static final BigDecimal discountMax = new BigDecimal(100);
 
