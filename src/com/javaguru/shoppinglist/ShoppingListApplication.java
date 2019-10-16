@@ -20,7 +20,7 @@ class ShoppingListApplication {
                     do {
                         ui.messageEnterName();
                         String name = scanner.nextLine();
-                        if (productValidator.validateName(name)) {
+                        if (productValidator.validateNameLength(name) && productValidator.validateNameUnique(name, productRepository)) {
                             product.setName(name);
                             stepProceed = true;
                         }
@@ -53,14 +53,18 @@ class ShoppingListApplication {
                     } while(!stepProceed);
                     stepProceed = false;
 
-                    do {
-                        ui.messageEnterDiscount();
-                        BigDecimal discount = scanner.nextBigDecimal();
-                        if (productValidator.validateDiscount(discount)) {
-                            product.setDiscount(discount);
-                            stepProceed = true;
-                        }
-                    } while(!stepProceed);
+                    if(productValidator.validatePriceMinForDiscount(product.getPrice())) {
+                        do {
+                            ui.messageEnterDiscount();
+                            BigDecimal discount = scanner.nextBigDecimal();
+                            if (productValidator.validateDiscount(discount)) {
+                                product.setDiscount(discount);
+                                stepProceed = true;
+                            }
+                        } while(!stepProceed);
+                    } else {
+                        stepProceed = true;
+                    }
 
                     productRepository.saveProduct(product);
                     break;
