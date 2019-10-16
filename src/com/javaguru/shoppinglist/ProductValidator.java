@@ -4,28 +4,28 @@ import java.math.BigDecimal;
 
 public class ProductValidator {
     public boolean validateName(String name) {
-        if(name.length() >= 3 && name.length() <= 32) {
+        if(name.length() >= Product.nameLengthMin && name.length() <= Product.nameLengthMax) {
             return true;
         } else {
-            new ValidationException("The name must be between 3 and 32 characters long. Please try again.");
+            new ValidationException("The name must be between " + Product.nameLengthMin + " and " + Product.nameLengthMax + " characters long. Please try again.");
             return false;
         }
     }
 
     public boolean validatePrice(BigDecimal price) {
-        if(price.compareTo(new BigDecimal(0)) == 1) {
+        if(price.compareTo(Product.priceMin) == 1) {
             return true;
         } else {
-            new ValidationException("The price must be higher than 0. Please try again.");
+            new ValidationException("The price must be higher than " + Product.priceMin + ". Please try again.");
             return false;
         }
     }
 
     public boolean validateDiscount(BigDecimal discount) {
-        if((discount.compareTo(new BigDecimal(0)) != -1) && (discount.compareTo(new BigDecimal(100)) != 1)) {
+        if((discount.compareTo(Product.discountMin) != -1) && (discount.compareTo(Product.discountMax) != 1)) {
             return true;
         } else {
-            new ValidationException("The discount must be between 0 and 100. Please try again.");
+            new ValidationException("The discount must be between " + Product.discountMin + " and " + Product.discountMax + ". Please try again.");
             return false;
         }
     }

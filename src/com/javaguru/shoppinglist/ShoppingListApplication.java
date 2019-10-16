@@ -1,28 +1,24 @@
 package com.javaguru.shoppinglist;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 class ShoppingListApplication {
 
     public static void main(String[] args) {
-        Map<Long, Product> productRepository = new HashMap<>();
-        Long productIdSequence = 0L;
+        ProductRepository productRepository = new ProductRepository();
         ProductValidator productValidator = new ProductValidator();
+        Ui ui = new Ui();
         while (true) {
+            ui.messageActions();
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Type 1 to create a product");
-            System.out.println("Type 2 to find product by id");
-            System.out.println("Type 3 to exit");
             Integer userInput = Integer.valueOf(scanner.nextLine());
             switch (userInput) {
                 case 1:
                     Product product = new Product();
                     boolean stepProceed = false;
                     do {
-                        System.out.println("Enter product name (3 to 32 characters): ");
+                        ui.messageEnterName();
                         String name = scanner.nextLine();
                         if (productValidator.validateName(name)) {
                             product.setName(name);
@@ -32,7 +28,7 @@ class ShoppingListApplication {
                     stepProceed = false;
 
                     do {
-                        System.out.println("Enter product category: ");
+                        ui.messageEnterCategory();
                         String category = scanner.nextLine();
                         product.setCategory(category);
                         stepProceed = true;
@@ -40,7 +36,7 @@ class ShoppingListApplication {
                     stepProceed = false;
 
                     do {
-                        System.out.println("Enter product description: ");
+                        ui.messageEnterDescription();
                         String description = scanner.nextLine();
                         product.setDescription(description);
                         stepProceed = true;
@@ -48,7 +44,7 @@ class ShoppingListApplication {
                     stepProceed = false;
 
                     do {
-                        System.out.println("Enter product price (more than 0): ");
+                        ui.messageEnterPrice();
                         BigDecimal price = new BigDecimal(scanner.nextLine());
                         if (productValidator.validatePrice(price)) {
                             product.setPrice(price);
@@ -58,7 +54,7 @@ class ShoppingListApplication {
                     stepProceed = false;
 
                     do {
-                        System.out.println("Enter product discount (0 to 100, decimals separated by comma): ");
+                        ui.messageEnterDiscount();
                         BigDecimal discount = scanner.nextBigDecimal();
                         if (productValidator.validateDiscount(discount)) {
                             product.setDiscount(discount);
@@ -66,16 +62,12 @@ class ShoppingListApplication {
                         }
                     } while(!stepProceed);
 
-                    product.setId(productIdSequence);
-                    productRepository.put(productIdSequence, product);
-                    productIdSequence++;
-                    System.out.println("The product has been created. It's ID is " + product.getId());
+                    productRepository.saveProduct(product);
                     break;
                 case 2:
                     System.out.println("Enter product id: ");
                     long id = scanner.nextLong();
-                    Product findProductResult = productRepository.get(id);
-                    System.out.println(findProductResult);
+                    System.out.println(productRepository.getProduct(id));
                     break;
                 case 3:
                     return;
