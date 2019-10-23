@@ -7,11 +7,12 @@ public class Ui {
             "Type 3 to exit"
     };
 
-    private String enterName = "Enter product name (" + Product.nameLengthMin + " to " + Product.nameLengthMax + " characters): ";
+    private String enterName = "Enter product name (" + Product.NAME_LENGTH_MIN + " to " + Product.NAME_LENGTH_MAX + " characters): ";
     private String enterCategory = "Enter product category: ";
     private String enterDescription = "Enter product description: ";
-    private String enterPrice = "Enter product price (more than " + Product.priceMin + "): ";
-    private String enterDiscount = "Enter product discount (" + Product.discountMin + " to " + Product.discountMax + ", decimals separated by comma): ";
+    private String enterPrice = "Enter product price (more than " + Product.PRICE_MIN + "): ";
+    private String enterDiscount = "Enter product discount (" + Product.DISCOUNT_MIN + " to " + Product.DISCOUNT_MAX + ", decimals separated by comma): ";
+    private String enterId = "Enter product id: ";
 
     public void messageActions() {
         for (String message : actions) {
@@ -37,5 +38,13 @@ public class Ui {
 
     public void messageEnterDiscount() {
         System.out.println(enterDiscount);
+    }
+
+    public void messageEnterId() {
+        System.out.println(enterId);
+    }
+
+    public void messageDisplayProduct(Product product) {
+        System.out.println(product);
     }
 }
