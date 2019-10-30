@@ -16,16 +16,14 @@ public class ProductRepository {
         return productRepository;
     }
 
-    public void saveProduct(Product product) {
+    public Product saveProduct(Product product) {
         product.setId(productIdSequence);
         productRepository.put(productIdSequence, product);
-        String success = "The product has been created. It's ID is ";
-        System.out.println(success + product.getId());
         productIdSequence++;
+        return product;
     }
 
     public Product getProduct(Long id) {
-        Product returnProduct = productRepository.get(id);
-        return returnProduct;
+        return productRepository.get(id);
     }
 }

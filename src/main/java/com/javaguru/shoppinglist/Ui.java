@@ -12,7 +12,8 @@ public class Ui {
     private String enterDescription = "Enter product description: ";
     private String enterPrice = "Enter product price (more than " + Product.PRICE_MIN + "): ";
     private String enterDiscount = "Enter product discount (" + Product.DISCOUNT_MIN + " to " + Product.DISCOUNT_MAX + ", decimals separated by comma): ";
-    private String enterId = "Enter product id: ";
+    private String enterId = "Enter product ID: ";
+    private String saveSuccess = "The product has been created. It's ID is ";
 
     public void messageActions() {
         for (String message : actions) {
@@ -46,5 +47,9 @@ public class Ui {
 
     public void messageDisplayProduct(Product product) {
         System.out.println(product);
+    }
+
+    public void messageSaveSuccess(Long id) {
+        System.out.println(saveSuccess + id);
     }
 }

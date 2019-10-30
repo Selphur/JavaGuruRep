@@ -7,7 +7,7 @@ public class ProductValidator {
         if (name.length() >= Product.NAME_LENGTH_MIN && name.length() <= Product.NAME_LENGTH_MAX) {
             return true;
         } else {
-            new ValidationException("The name must be between " + Product.NAME_LENGTH_MIN + " and " + Product.NAME_LENGTH_MAX + " characters long. Please try again.");
+            System.out.println("The name must be between " + Product.NAME_LENGTH_MIN + " and " + Product.NAME_LENGTH_MAX + " characters long. Please try again.");
             return false;
         }
     }
@@ -16,7 +16,7 @@ public class ProductValidator {
         if (price.compareTo(Product.PRICE_MIN) == 1) {
             return true;
         } else {
-            new ValidationException("The price must be higher than " + Product.PRICE_MIN + ". Please try again.");
+            System.out.println("The price must be higher than " + Product.PRICE_MIN + ". Please try again.");
             return false;
         }
     }
@@ -34,7 +34,7 @@ public class ProductValidator {
         if ((discount.compareTo(Product.DISCOUNT_MIN) != -1) && (discount.compareTo(Product.DISCOUNT_MAX) != 1)) {
             return true;
         } else {
-            new ValidationException("The discount must be between " + Product.DISCOUNT_MIN + " and " + Product.DISCOUNT_MAX + ". Please try again.");
+            System.out.println("The discount must be between " + Product.DISCOUNT_MIN + " and " + Product.DISCOUNT_MAX + ". Please try again.");
             return false;
         }
     }
@@ -43,7 +43,7 @@ public class ProductValidator {
         boolean result = true;
         for (Product product : productRepository.getProductRepository().values()) {
             if (name.equalsIgnoreCase(product.getName())) {
-                new ValidationException("Such a product already exists. The name must be unique. Please try again.");
+                System.out.println("Such a product already exists. The name must be unique. Please try again.");
                 result = false;
             }
         }
