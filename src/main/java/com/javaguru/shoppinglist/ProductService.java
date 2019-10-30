@@ -57,4 +57,9 @@ public class ProductService {
         long id = scanner.nextLong();
         ui.messageDisplayProduct(productRepository.getProduct(id));
     }
+
+    public void saveProduct(Product product, ProductRepository productRepository, Ui ui) {
+        productRepository.saveProduct(product);
+        ui.messageSaveSuccess(product.getId());
+    }
 }

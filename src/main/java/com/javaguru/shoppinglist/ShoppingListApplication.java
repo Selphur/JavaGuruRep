@@ -26,7 +26,7 @@ class ShoppingListApplication {
                     ui.messageEnterPrice();
                     productService.setProductPrice(product, productValidator);
                     productService.setProductDiscount(product, productValidator, ui);
-                    productRepository.saveProduct(product);
+                    productService.saveProduct(product, productRepository, ui);
                     break;
                 case 2:
                     ui.messageEnterId();
