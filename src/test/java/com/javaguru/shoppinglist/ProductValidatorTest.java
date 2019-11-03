@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class ProductValidatorTest {
 
     @InjectMocks
-    private ProductValidator victim = new ProductValidator();
+    private ProductValidator victim = new ProductValidator(new Ui());
 
     @Test
     public void nameLengthExpectTrue() {

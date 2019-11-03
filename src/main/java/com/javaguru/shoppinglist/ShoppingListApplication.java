@@ -6,10 +6,11 @@ import java.util.Scanner;
 class ShoppingListApplication {
 
     public static void main(String[] args) {
-        ProductRepository productRepository = new ProductRepository(new HashMap<>(), 0L);
-        ProductValidator productValidator = new ProductValidator();
-        ProductService productService = new ProductService();
         Ui ui = new Ui();
+        ProductValidator productValidator = new ProductValidator(ui);
+        ProductRepository productRepository = new ProductRepository(new HashMap<>(), 0L);
+        ProductService productService = new ProductService(ui, productValidator, productRepository);
+        UiControl uiControl = new UiControl(ui, productService, productValidator);
         while (true) {
             ui.messageActions();
             Scanner scanner = new Scanner(System.in);
@@ -18,19 +19,19 @@ class ShoppingListApplication {
                 case 1:
                     Product product = new Product();
                     ui.messageEnterName();
-                    productService.setProductName(product, productValidator, productRepository);
+                    uiControl.setProductNameControl(product);
                     ui.messageEnterCategory();
-                    productService.setProductCategory(product);
+                    uiControl.setProductCategoryControl(product);
                     ui.messageEnterDescription();
-                    productService.setProductDescription(product);
+                    uiControl.setProductDescriptionControl(product);
                     ui.messageEnterPrice();
-                    productService.setProductPrice(product, productValidator);
-                    productService.setProductDiscount(product, productValidator, ui);
-                    productService.saveProduct(product, productRepository, ui);
+                    uiControl.setProductPriceControl(product);
+                    uiControl.setProductDiscountControl(product);
+                    productService.saveProduct(product);
                     break;
                 case 2:
                     ui.messageEnterId();
-                    productService.getProduct(productRepository, ui);
+                    productService.getProduct();
                     break;
                 case 3:
                     return;
