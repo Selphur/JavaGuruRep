@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
@@ -30,7 +31,6 @@ public class ProductServiceTest {
     @Test
     public void setProductNameExpectNotNull() {
 
-        product = new Product();
         String name = "apple";
 
         when(productValidator.validateNameLength(name)).thenReturn(true);
@@ -39,6 +39,33 @@ public class ProductServiceTest {
         victim.setProductName(product, name);
 
         String result = product.getName();
+
+        System.out.println(result);
+        assertNotNull(result);
+    }
+
+    @Test
+    public void setProductPriceExpectNull() {
+        BigDecimal price = new BigDecimal(1);
+
+        when(productValidator.validatePrice(price)).thenReturn(false);
+
+        victim.setProductPrice(product, price);
+
+        BigDecimal result = product.getPrice();
+
+        assertNull(result);
+    }
+
+    @Test
+    public void setProductDiscountExpectNotNull() {
+        BigDecimal discount = new BigDecimal(105);
+
+        when(productValidator.validateDiscount(discount)).thenReturn(true);
+
+        victim.setProductDiscount(product, discount);
+
+        BigDecimal result = product.getDiscount();
 
         assertNotNull(result);
     }
