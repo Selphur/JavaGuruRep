@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class ProductServiceTest {
 
     @InjectMocks
-    private ProductService victim = new ProductService(new Ui(), new ProductValidator(new Ui()), new ProductRepository(new HashMap<>(), 0L));
+    private ProductService victim = new ProductService(new ProductValidator(new Ui()), new ProductRepository(new HashMap<>(), 0L));
 
     @Mock
     ProductValidator productValidator;
@@ -36,7 +36,7 @@ public class ProductServiceTest {
         when(productValidator.validateNameLength(name)).thenReturn(true);
         when(productValidator.validateNameUnique(name, productRepository)).thenReturn(true);
 
-        victim.setProductName(product, name);
+        victim.assignProductName(product, name);
 
         String result = product.getName();
 
@@ -50,7 +50,7 @@ public class ProductServiceTest {
 
         when(productValidator.validatePrice(price)).thenReturn(false);
 
-        victim.setProductPrice(product, price);
+        victim.assignProductPrice(product, price);
 
         BigDecimal result = product.getPrice();
 
@@ -63,7 +63,7 @@ public class ProductServiceTest {
 
         when(productValidator.validateDiscount(discount)).thenReturn(true);
 
-        victim.setProductDiscount(product, discount);
+        victim.assignProductDiscount(product, discount);
 
         BigDecimal result = product.getDiscount();
 

@@ -15,43 +15,52 @@ public class UiControl {
         this.productValidator = productValidator;
     }
 
-    public void setProductNameControl(Product product) {
+    public void assignProductNameControl(Product product) {
         do {
             String name = scanner.nextLine();
-            if (productService.setProductName(product, name)) {
+            if (productService.assignProductName(product, name)) {
                 break;
             }
         } while (true);
     }
 
-    public void setProductCategoryControl(Product product) {
+    public void assignProductCategoryControl(Product product) {
         String category = scanner.nextLine();
-        productService.setProductCategory(product, category);
+        productService.assignProductCategory(product, category);
     }
 
-    public void setProductDescriptionControl(Product product) {
+    public void assignProductDescriptionControl(Product product) {
         String description = scanner.nextLine();
-        productService.setProductDescription(product, description);
+        productService.assignProductDescription(product, description);
     }
 
-    public void setProductPriceControl(Product product) {
+    public void assignProductPriceControl(Product product) {
         do {
             BigDecimal price = scanner.nextBigDecimal();
-            if (productService.setProductPrice(product, price)) {
+            if (productService.assignProductPrice(product, price)) {
                 break;
             }
         } while (true);
     }
 
-    public void setProductDiscountControl(Product product) {
+    public void assignProductDiscountControl(Product product) {
         if (productValidator.validatePriceMinForDiscount(product.getPrice())) {
             do {
                 ui.messageEnterDiscount();
                 BigDecimal price = scanner.nextBigDecimal();
-                if (productService.setProductDiscount(product, price)) {
+                if (productService.assignProductDiscount(product, price)) {
                     break;
                 }
             } while (true);
         }
+    }
+
+    public void retrieveProductControl() {
+        long id = scanner.nextLong();
+        ui.messageDisplayProduct(productService.retrieveProduct(id));
+    }
+
+    public void saveProductControl(Product product) {
+        ui.messageSaveSuccess(productService.saveProduct(product).getId());
     }
 }
