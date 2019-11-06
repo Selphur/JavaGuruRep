@@ -14,7 +14,7 @@ class ShoppingListApplication {
         while (true) {
             ui.messageActions();
             Scanner scanner = new Scanner(System.in);
-            Integer userInput = Integer.valueOf(scanner.nextLine());
+            int userInput = scanner.nextInt();
             switch (userInput) {
                 case 1:
                     Product product = new Product();

@@ -18,7 +18,7 @@ public class UiControl {
     public void assignProductNameControl(Product product) {
         do {
             String name = scanner.nextLine();
-            if (productService.assignProductName(product, name)) {
+            if(productService.assignProductName(product, name)) {
                 break;
             }
         } while (true);
