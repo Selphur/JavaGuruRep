@@ -1,5 +1,8 @@
 package com.javaguru.shoppinglist;
 
+import com.javaguru.shoppinglist.ui.Ui;
+import com.javaguru.shoppinglist.validator.ProductValidator;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -17,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class ProductValidatorTest {
 
     @InjectMocks
-    private ProductValidator victim = new ProductValidator(new Ui());
+    private ProductValidator victim = new ProductValidator();
 
     @Test
     public void nameLengthExpectTrue() {

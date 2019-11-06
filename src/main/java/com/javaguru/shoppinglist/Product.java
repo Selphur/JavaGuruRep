@@ -12,12 +12,12 @@ public class Product {
     private BigDecimal discount;
     private String description;
 
-    static final int NAME_LENGTH_MIN = 3;
-    static final int NAME_LENGTH_MAX = 32;
-    static final BigDecimal PRICE_MIN = new BigDecimal(0);
-    static final BigDecimal PRICE_MIN_FOR_DISCOUNT = new BigDecimal(20);
-    static final BigDecimal DISCOUNT_MIN = new BigDecimal(0);
-    static final BigDecimal DISCOUNT_MAX = new BigDecimal(100);
+    public static final int NAME_LENGTH_MIN = 3;
+    public static final int NAME_LENGTH_MAX = 32;
+    public static final BigDecimal PRICE_MIN = new BigDecimal(0);
+    public static final BigDecimal PRICE_MIN_FOR_DISCOUNT = new BigDecimal(20);
+    public static final BigDecimal DISCOUNT_MIN = new BigDecimal(0);
+    public static final BigDecimal DISCOUNT_MAX = new BigDecimal(100);
 
     public Long getId() {
         return id;

@@ -1,5 +1,7 @@
 package com.javaguru.shoppinglist;
 
+import com.javaguru.shoppinglist.validator.ProductValidator;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 

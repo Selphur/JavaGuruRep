@@ -1,4 +1,6 @@
-package com.javaguru.shoppinglist;
+package com.javaguru.shoppinglist.ui;
+
+import com.javaguru.shoppinglist.Product;
 
 import java.util.Scanner;
 
@@ -17,11 +19,6 @@ public class Ui {
     private String enterDiscount = "Enter product discount (" + Product.DISCOUNT_MIN + " to " + Product.DISCOUNT_MAX + ", decimals separated by comma): ";
     private String enterId = "Enter product ID: ";
     private String saveSuccess = "The product has been created. It's ID is ";
-    private String validateNameLengthFail = "The name must be between " + Product.NAME_LENGTH_MIN + " and " + Product.NAME_LENGTH_MAX + " characters long. Please try again.";
-    private String validatePriceFail = "The price must be higher than " + Product.PRICE_MIN + ". Please try again.";
-    private String validatePriceMinForDiscountFail = "The price is lower than " + Product.PRICE_MIN_FOR_DISCOUNT + ", the discount cannot be set. Proceeding...";
-    private String validateDiscountFail = "The discount must be between " + Product.DISCOUNT_MIN + " and " + Product.DISCOUNT_MAX + ". Please try again.";
-    private String validateNameUniqueFail = "Such a product already exists. The name must be unique. Please try again.";
 
     public void messageActions() {
         for (String message : actions) {
@@ -59,25 +56,5 @@ public class Ui {
 
     public void messageSaveSuccess(Long id) {
         System.out.println(saveSuccess + id);
-    }
-
-    public void messageValidateNameLengthFail() {
-        System.out.println(validateNameLengthFail);
-    }
-
-    public void messageValidatePriceFail() {
-        System.out.println(validatePriceFail);
-    }
-
-    public void messageValidatePriceMinForDiscountFail() {
-        System.out.println(validatePriceMinForDiscountFail);
-    }
-
-    public void messageValidateDiscountFail() {
-        System.out.println(validateDiscountFail);
-    }
-
-    public void messageValidateNameUniqueFail() {
-        System.out.println(validateNameUniqueFail);
     }
 }

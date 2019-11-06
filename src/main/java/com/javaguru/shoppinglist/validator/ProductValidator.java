@@ -1,14 +1,11 @@
-package com.javaguru.shoppinglist;
+package com.javaguru.shoppinglist.validator;
+
+import com.javaguru.shoppinglist.Product;
+import com.javaguru.shoppinglist.ProductRepository;
 
 import java.math.BigDecimal;
 
 public class ProductValidator {
-
-    Ui ui;
-
-    public ProductValidator(Ui ui) {
-        this.ui = ui;
-    }
 
     public boolean validateNameLength(String name) {
         if (name.length() >= Product.NAME_LENGTH_MIN && name.length() <= Product.NAME_LENGTH_MAX) {
@@ -30,7 +27,6 @@ public class ProductValidator {
         if(price.compareTo(Product.PRICE_MIN_FOR_DISCOUNT) != -1) {
             return true;
         } else {
-            ui.messageValidatePriceMinForDiscountFail();
             return false;
         }
     }

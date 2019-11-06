@@ -1,5 +1,8 @@
 package com.javaguru.shoppinglist;
 
+import com.javaguru.shoppinglist.ui.Ui;
+import com.javaguru.shoppinglist.validator.ProductValidator;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -17,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class ProductServiceTest {
 
     @InjectMocks
-    private ProductService victim = new ProductService(new ProductValidator(new Ui()), new ProductRepository(new HashMap<>(), 0L));
+    private ProductService victim = new ProductService(new ProductValidator(), new ProductRepository(new HashMap<>(), 0L));
 
     @Mock
     ProductValidator productValidator;

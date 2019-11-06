@@ -1,4 +1,8 @@
-package com.javaguru.shoppinglist;
+package com.javaguru.shoppinglist.ui;
+
+import com.javaguru.shoppinglist.Product;
+import com.javaguru.shoppinglist.ProductService;
+import com.javaguru.shoppinglist.validator.ProductValidator;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
