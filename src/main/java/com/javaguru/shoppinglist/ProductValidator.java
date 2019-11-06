@@ -14,8 +14,7 @@ public class ProductValidator {
         if (name.length() >= Product.NAME_LENGTH_MIN && name.length() <= Product.NAME_LENGTH_MAX) {
             return true;
         } else {
-            ui.messageValidateNameLengthFail();
-            return false;
+            throw new ValidationException("The name must be between " + Product.NAME_LENGTH_MIN + " and " + Product.NAME_LENGTH_MAX + " characters long. Please try again.");
         }
     }
 
@@ -23,8 +22,7 @@ public class ProductValidator {
         if (price.compareTo(Product.PRICE_MIN) == 1) {
             return true;
         } else {
-            ui.messageValidatePriceFail();
-            return false;
+            throw new ValidationException("The price must be higher than " + Product.PRICE_MIN + ". Please try again.");
         }
     }
 
@@ -41,8 +39,7 @@ public class ProductValidator {
         if ((discount.compareTo(Product.DISCOUNT_MIN) != -1) && (discount.compareTo(Product.DISCOUNT_MAX) != 1)) {
             return true;
         } else {
-            ui.messageValidateDiscountFail();
-            return false;
+            throw new ValidationException("The discount must be between " + Product.DISCOUNT_MIN + " and " + Product.DISCOUNT_MAX + ". Please try again.");
         }
     }
 
@@ -50,8 +47,7 @@ public class ProductValidator {
         boolean result = true;
         for (Product product : productRepository.getProductRepository().values()) {
             if (name.equalsIgnoreCase(product.getName())) {
-                ui.messageValidateNameUniqueFail();
-                result = false;
+                throw new ValidationException("Such a product already exists. The name must be unique. Please try again.");
             }
         }
         return result;
