@@ -6,31 +6,33 @@ import java.util.Scanner;
 class ShoppingListApplication {
 
     public static void main(String[] args) {
-        ProductRepository productRepository = new ProductRepository(new HashMap<>(), 0L);
-        ProductValidator productValidator = new ProductValidator();
-        ProductService productService = new ProductService();
         Ui ui = new Ui();
+        ProductValidator productValidator = new ProductValidator(ui);
+        ProductRepository productRepository = new ProductRepository(new HashMap<>(), 0L);
         while (true) {
+            ProductService productService = new ProductService(productValidator, productRepository);
+            UiControl uiControl = new UiControl(ui, productService, productValidator);
+
             ui.messageActions();
             Scanner scanner = new Scanner(System.in);
-            Integer userInput = Integer.valueOf(scanner.nextLine());
+            int userInput = scanner.nextInt();
             switch (userInput) {
                 case 1:
                     Product product = new Product();
                     ui.messageEnterName();
-                    productService.setProductName(product, productValidator, productRepository);
+                    uiControl.assignProductNameControl(product);
                     ui.messageEnterCategory();
-                    productService.setProductCategory(product);
+                    uiControl.assignProductCategoryControl(product);
                     ui.messageEnterDescription();
-                    productService.setProductDescription(product);
+                    uiControl.assignProductDescriptionControl(product);
                     ui.messageEnterPrice();
-                    productService.setProductPrice(product, productValidator);
-                    productService.setProductDiscount(product, productValidator, ui);
-                    productService.saveProduct(product, productRepository, ui);
+                    uiControl.assignProductPriceControl(product);
+                    uiControl.assignProductDiscountControl(product);
+                    uiControl.saveProductControl(product);
                     break;
                 case 2:
                     ui.messageEnterId();
-                    productService.getProduct(productRepository, ui);
+                    uiControl.retrieveProductControl();
                     break;
                 case 3:
                     return;
