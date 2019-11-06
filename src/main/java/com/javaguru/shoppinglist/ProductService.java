@@ -2,17 +2,18 @@ package com.javaguru.shoppinglist;
 
 import com.javaguru.shoppinglist.validator.ProductValidator;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class ProductService {
-
-    private Scanner scanner;
     private ProductValidator productValidator;
     private ProductRepository productRepository;
 
     public ProductService(ProductValidator productValidator, ProductRepository productRepository) {
-        this.scanner = new Scanner(System.in);
         this.productValidator = productValidator;
         this.productRepository = productRepository;
     }

@@ -4,6 +4,8 @@ import com.javaguru.shoppinglist.Product;
 import com.javaguru.shoppinglist.ProductService;
 import com.javaguru.shoppinglist.validator.ProductValidator;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 

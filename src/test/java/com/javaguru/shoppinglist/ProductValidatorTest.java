@@ -2,6 +2,7 @@ package com.javaguru.shoppinglist;
 
 import com.javaguru.shoppinglist.ui.Ui;
 import com.javaguru.shoppinglist.validator.ProductValidator;
+import com.javaguru.shoppinglist.validator.ValidationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,8 +54,8 @@ public class ProductValidatorTest {
     @Mock
     ProductRepository productRepositoryMock;
 
-    @Test
-    public void validateNameUniqueExpectFalse() {
+    @Test(expected = ValidationException.class)
+    public void validateNameUniqueExpectException() {
         Map<Long, Product> productRepository = new HashMap<>();
 
         Product product = new Product();
@@ -63,7 +64,6 @@ public class ProductValidatorTest {
 
         when(productRepositoryMock.getProductRepository()).thenReturn(productRepository);
 
-        boolean result = victim.validateNameUnique("apple", productRepositoryMock);
-        assertEquals(false, result);
+        victim.validateNameUnique("apple", productRepositoryMock);
     }
 }

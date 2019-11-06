@@ -4,19 +4,19 @@ import com.javaguru.shoppinglist.ui.Ui;
 import com.javaguru.shoppinglist.ui.UiControl;
 import com.javaguru.shoppinglist.validator.ProductValidator;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.util.HashMap;
 import java.util.Scanner;
 
 class ShoppingListApplication {
 
     public static void main(String[] args) {
-        Ui ui = new Ui();
-        ProductValidator productValidator = new ProductValidator();
-        ProductRepository productRepository = new ProductRepository(new HashMap<>(), 0L);
+        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
+        Ui ui = context.getBean(Ui.class);
         while (true) {
-            ProductService productService = new ProductService(productValidator, productRepository);
-            UiControl uiControl = new UiControl(ui, productService, productValidator);
-
+            UiControl uiControl = context.getBean(UiControl.class);
             ui.messageActions();
             Scanner scanner = new Scanner(System.in);
             int userInput = scanner.nextInt();
