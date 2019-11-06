@@ -9,9 +9,10 @@ class ShoppingListApplication {
         Ui ui = new Ui();
         ProductValidator productValidator = new ProductValidator(ui);
         ProductRepository productRepository = new ProductRepository(new HashMap<>(), 0L);
-        ProductService productService = new ProductService(productValidator, productRepository);
-        UiControl uiControl = new UiControl(ui, productService, productValidator);
         while (true) {
+            ProductService productService = new ProductService(productValidator, productRepository);
+            UiControl uiControl = new UiControl(ui, productService, productValidator);
+
             ui.messageActions();
             Scanner scanner = new Scanner(System.in);
             int userInput = scanner.nextInt();
