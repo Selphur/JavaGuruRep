@@ -1,11 +1,10 @@
 package com.javaguru.shoppinglist;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class Product {
 
-    private Long id;
+    private int id;
     private String name;
     private BigDecimal price;
     private String category;
@@ -19,11 +18,11 @@ public class Product {
     public static final BigDecimal DISCOUNT_MIN = new BigDecimal(0);
     public static final BigDecimal DISCOUNT_MAX = new BigDecimal(100);
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

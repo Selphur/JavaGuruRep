@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class ProductRepositoryTest {
 
     @InjectMocks
-    private ProductRepository victim = new ProductRepository(new HashMap<>(), 0L);
+    private ProductRepository victim = new ProductRepository(new HashMap<>(), 0);
 
     @Mock
     Product product;

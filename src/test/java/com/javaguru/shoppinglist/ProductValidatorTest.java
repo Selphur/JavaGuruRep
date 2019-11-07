@@ -1,6 +1,5 @@
 package com.javaguru.shoppinglist;
 
-import com.javaguru.shoppinglist.ui.Ui;
 import com.javaguru.shoppinglist.validator.ProductValidator;
 import com.javaguru.shoppinglist.validator.ValidationException;
 
@@ -14,7 +13,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -56,11 +56,11 @@ public class ProductValidatorTest {
 
     @Test(expected = ValidationException.class)
     public void validateNameUniqueExpectException() {
-        Map<Long, Product> productRepository = new HashMap<>();
+        Map<Integer, Product> productRepository = new HashMap<>();
 
         Product product = new Product();
         product.setName("apple");
-        productRepository.put(0L, product);
+        productRepository.put(0, product);
 
         when(productRepositoryMock.getProductRepository()).thenReturn(productRepository);
 

@@ -1,6 +1,5 @@
 package com.javaguru.shoppinglist;
 
-import com.javaguru.shoppinglist.ui.Ui;
 import com.javaguru.shoppinglist.validator.ProductValidator;
 
 import org.junit.Test;
@@ -13,14 +12,15 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceTest {
 
     @InjectMocks
-    private ProductService victim = new ProductService(new ProductValidator(), new ProductRepository(new HashMap<>(), 0L));
+    private ProductService victim = new ProductService(new ProductValidator(), new ProductRepository(new HashMap<>(), 0));
 
     @Mock
     ProductValidator productValidator;
@@ -30,6 +30,9 @@ public class ProductServiceTest {
 
     @Spy
     Product product;
+
+    @Spy
+    Ui ui;
 
     @Test
     public void setProductNameExpectNotNull() {
@@ -63,10 +66,11 @@ public class ProductServiceTest {
     @Test
     public void setProductDiscountExpectNotNull() {
         BigDecimal discount = new BigDecimal(105);
+        ui = new Ui();
 
         when(productValidator.validateDiscount(discount)).thenReturn(true);
 
-        victim.assignProductDiscount(product, discount);
+        victim.assignProductDiscount(product, ui);
 
         BigDecimal result = product.getDiscount();
 

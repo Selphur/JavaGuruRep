@@ -2,12 +2,7 @@ package com.javaguru.shoppinglist;
 
 import com.javaguru.shoppinglist.validator.ProductValidator;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import java.math.BigDecimal;
-import java.util.Scanner;
 
 public class ProductService {
     private ProductValidator productValidator;
@@ -18,13 +13,10 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public boolean assignProductName(Product product, String name) {
-        if (productValidator.validateNameLength(name) && productValidator.validateNameUnique(name, productRepository)) {
-            product.setName(name);
-            return true;
-        } else {
-            return false;
-        }
+    public void assignProductName(Product product, String name) {
+        productValidator.validateNameLength(name);
+        productValidator.validateNameUnique(name, productRepository);
+        product.setName(name);
     }
 
     public void assignProductCategory(Product product, String category) {
@@ -35,25 +27,20 @@ public class ProductService {
         product.setDescription(description);
     }
 
-    public boolean assignProductPrice(Product product, BigDecimal price) {
-        if (productValidator.validatePrice(price)) {
-            product.setPrice(price);
-            return true;
-        } else {
-            return false;
-        }
+    public void assignProductPrice(Product product, BigDecimal price) {
+        productValidator.validatePrice(price);
+        product.setPrice(price);
     }
 
-    public boolean assignProductDiscount(Product product, BigDecimal discount) {
-        if (productValidator.validateDiscount(discount)) {
+    public void assignProductDiscount(Product product, Ui ui) {
+        if(productValidator.validatePriceMinForDiscount(product.getPrice())) {
+            BigDecimal discount = ui.messageEnterDiscount();
+            productValidator.validateDiscount(discount);
             product.setDiscount(discount);
-            return true;
-        } else {
-            return false;
         }
     }
 
-    public Product retrieveProduct(Long id) {
+    public Product retrieveProduct(int id) {
         return productRepository.getProduct(id);
     }
 

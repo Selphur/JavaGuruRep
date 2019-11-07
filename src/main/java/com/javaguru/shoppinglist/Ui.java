@@ -1,10 +1,11 @@
-package com.javaguru.shoppinglist.ui;
+package com.javaguru.shoppinglist;
 
-import com.javaguru.shoppinglist.Product;
-
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Ui {
+
+
 
     private String[] actions = {
             "Type 1 to create a product",
@@ -26,35 +27,47 @@ public class Ui {
         }
     }
 
-    public void messageEnterName() {
+    public String messageEnterName() {
         System.out.println(enterName);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
-    public void messageEnterCategory() {
+    public String messageEnterCategory() {
         System.out.println(enterCategory);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
-    public void messageEnterDescription() {
+    public String messageEnterDescription() {
         System.out.println(enterDescription);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
-    public void messageEnterPrice() {
+    public BigDecimal messageEnterPrice() {
         System.out.println(enterPrice);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextBigDecimal();
     }
 
-    public void messageEnterDiscount() {
+    public BigDecimal messageEnterDiscount() {
         System.out.println(enterDiscount);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextBigDecimal();
     }
 
-    public void messageEnterId() {
+    public int messageEnterId() {
         System.out.println(enterId);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
     public void messageDisplayProduct(Product product) {
         System.out.println(product);
     }
 
-    public void messageSaveSuccess(Long id) {
+    public void messageSaveSuccess(int id) {
         System.out.println(saveSuccess + id);
     }
 }
