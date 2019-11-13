@@ -66,11 +66,10 @@ public class ProductServiceTest {
     @Test
     public void setProductDiscountExpectNotNull() {
         BigDecimal discount = new BigDecimal(105);
-        ui = new Ui();
 
         when(productValidator.validateDiscount(discount)).thenReturn(true);
 
-        victim.assignProductDiscount(product, ui);
+        victim.assignProductDiscount(product, discount);
 
         BigDecimal result = product.getDiscount();
 

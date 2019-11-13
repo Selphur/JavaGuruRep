@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 public class Ui {
 
-
-
     private String[] actions = {
             "Type 1 to create a product",
             "Type 2 to find product by id",
@@ -27,40 +25,28 @@ public class Ui {
         }
     }
 
-    public String messageEnterName() {
+    public void messageEnterName() {
         System.out.println(enterName);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
     }
 
-    public String messageEnterCategory() {
+    public void messageEnterCategory() {
         System.out.println(enterCategory);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
     }
 
-    public String messageEnterDescription() {
+    public void messageEnterDescription() {
         System.out.println(enterDescription);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
     }
 
-    public BigDecimal messageEnterPrice() {
+    public void messageEnterPrice() {
         System.out.println(enterPrice);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextBigDecimal();
     }
 
-    public BigDecimal messageEnterDiscount() {
+    public void messageEnterDiscount() {
         System.out.println(enterDiscount);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextBigDecimal();
     }
 
-    public int messageEnterId() {
+    public void messageEnterId() {
         System.out.println(enterId);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
     }
 
     public void messageDisplayProduct(Product product) {
@@ -69,5 +55,20 @@ public class Ui {
 
     public void messageSaveSuccess(int id) {
         System.out.println(saveSuccess + id);
+    }
+
+    public String retrieveString() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    public BigDecimal retrieveBigDecimal() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextBigDecimal();
+    }
+
+    public int retrieveInt() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 }

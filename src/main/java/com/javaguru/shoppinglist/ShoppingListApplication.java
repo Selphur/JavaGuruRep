@@ -1,5 +1,7 @@
 package com.javaguru.shoppinglist;
 
+import com.javaguru.shoppinglist.validator.ProductValidator;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -11,6 +13,7 @@ class ShoppingListApplication {
         ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
         Ui ui = context.getBean(Ui.class);
         ProductService productService = context.getBean(ProductService.class);
+        ProductValidator productValidator = context.getBean(ProductValidator.class);
         while (true) {
             ui.messageActions();
             Scanner scanner = new Scanner(System.in);
@@ -18,16 +21,24 @@ class ShoppingListApplication {
             switch (userInput) {
                 case 1:
                     Product product = new Product();
-                    productService.assignProductName(product, ui.messageEnterName());
-                    productService.assignProductCategory(product, ui.messageEnterCategory());
-                    productService.assignProductDescription(product, ui.messageEnterDescription());
-                    productService.assignProductPrice(product, ui.messageEnterPrice());
-                    productService.assignProductDiscount(product, ui);
+                    ui.messageEnterName();
+                    productService.assignProductName(product, ui.retrieveString());
+                    ui.messageEnterCategory();
+                    productService.assignProductCategory(product, ui.retrieveString());
+                    ui.messageEnterDescription();
+                    productService.assignProductDescription(product, ui.retrieveString());
+                    ui.messageEnterPrice();
+                    productService.assignProductPrice(product, ui.retrieveBigDecimal());
+                    if(productValidator.validatePriceMinForDiscount(product.getPrice())) {
+                        ui.messageEnterDiscount();
+                        productService.assignProductDiscount(product, ui.retrieveBigDecimal());
+                    }
                     productService.saveProduct(product);
                     ui.messageSaveSuccess(product.getId());
                     break;
                 case 2:
-                    Product returnedProduct = productService.retrieveProduct(ui.messageEnterId());
+                    ui.messageEnterId();
+                    Product returnedProduct = productService.retrieveProduct(ui.retrieveInt());
                     ui.messageDisplayProduct(returnedProduct);
                     break;
                 case 3:

@@ -32,9 +32,8 @@ public class ProductService {
         product.setPrice(price);
     }
 
-    public void assignProductDiscount(Product product, Ui ui) {
+    public void assignProductDiscount(Product product, BigDecimal discount) {
         if(productValidator.validatePriceMinForDiscount(product.getPrice())) {
-            BigDecimal discount = ui.messageEnterDiscount();
             productValidator.validateDiscount(discount);
             product.setDiscount(discount);
         }
