@@ -29,10 +29,8 @@ class ShoppingListApplication {
                     productService.assignProductDescription(product, ui.retrieveString());
                     ui.messageEnterPrice();
                     productService.assignProductPrice(product, ui.retrieveBigDecimal());
-                    if(productValidator.validatePriceMinForDiscount(product.getPrice())) {
-                        ui.messageEnterDiscount();
-                        productService.assignProductDiscount(product, ui.retrieveBigDecimal());
-                    }
+                    ui.messageEnterDiscount();
+                    productService.assignProductDiscount(product, ui.retrieveBigDecimal());
                     productService.saveProduct(product);
                     ui.messageSaveSuccess(product.getId());
                     break;
