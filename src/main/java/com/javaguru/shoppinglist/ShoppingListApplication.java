@@ -1,18 +1,20 @@
 package com.javaguru.shoppinglist;
 
-import java.util.HashMap;
+import com.javaguru.shoppinglist.validator.ProductValidator;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.util.Scanner;
 
 class ShoppingListApplication {
 
     public static void main(String[] args) {
-        Ui ui = new Ui();
-        ProductValidator productValidator = new ProductValidator(ui);
-        ProductRepository productRepository = new ProductRepository(new HashMap<>(), 0L);
+        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
+        Ui ui = context.getBean(Ui.class);
+        ProductService productService = context.getBean(ProductService.class);
+        ProductValidator productValidator = context.getBean(ProductValidator.class);
         while (true) {
-            ProductService productService = new ProductService(productValidator, productRepository);
-            UiControl uiControl = new UiControl(ui, productService, productValidator);
-
             ui.messageActions();
             Scanner scanner = new Scanner(System.in);
             int userInput = scanner.nextInt();
@@ -20,19 +22,22 @@ class ShoppingListApplication {
                 case 1:
                     Product product = new Product();
                     ui.messageEnterName();
-                    uiControl.assignProductNameControl(product);
+                    productService.assignProductName(product, ui.retrieveString());
                     ui.messageEnterCategory();
-                    uiControl.assignProductCategoryControl(product);
+                    productService.assignProductCategory(product, ui.retrieveString());
                     ui.messageEnterDescription();
-                    uiControl.assignProductDescriptionControl(product);
+                    productService.assignProductDescription(product, ui.retrieveString());
                     ui.messageEnterPrice();
-                    uiControl.assignProductPriceControl(product);
-                    uiControl.assignProductDiscountControl(product);
-                    uiControl.saveProductControl(product);
+                    productService.assignProductPrice(product, ui.retrieveBigDecimal());
+                    ui.messageEnterDiscount();
+                    productService.assignProductDiscount(product, ui.retrieveBigDecimal());
+                    productService.saveProduct(product);
+                    ui.messageSaveSuccess(product.getId());
                     break;
                 case 2:
                     ui.messageEnterId();
-                    uiControl.retrieveProductControl();
+                    Product returnedProduct = productService.retrieveProduct(ui.retrieveInt());
+                    ui.messageDisplayProduct(returnedProduct);
                     break;
                 case 3:
                     return;

@@ -1,5 +1,8 @@
 package com.javaguru.shoppinglist;
 
+import com.javaguru.shoppinglist.validator.ProductValidator;
+import com.javaguru.shoppinglist.validator.ValidationException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,14 +13,15 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductValidatorTest {
 
     @InjectMocks
-    private ProductValidator victim = new ProductValidator(new Ui());
+    private ProductValidator victim = new ProductValidator();
 
     @Test
     public void nameLengthExpectTrue() {
@@ -50,17 +54,16 @@ public class ProductValidatorTest {
     @Mock
     ProductRepository productRepositoryMock;
 
-    @Test
-    public void validateNameUniqueExpectFalse() {
-        Map<Long, Product> productRepository = new HashMap<>();
+    @Test(expected = ValidationException.class)
+    public void validateNameUniqueExpectException() {
+        Map<Integer, Product> productRepository = new HashMap<>();
 
         Product product = new Product();
         product.setName("apple");
-        productRepository.put(0L, product);
+        productRepository.put(0, product);
 
         when(productRepositoryMock.getProductRepository()).thenReturn(productRepository);
 
-        boolean result = victim.validateNameUnique("apple", productRepositoryMock);
-        assertEquals(false, result);
+        victim.validateNameUnique("apple", productRepositoryMock);
     }
 }

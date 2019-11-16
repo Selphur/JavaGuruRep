@@ -4,15 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProductRepository {
-    private Map<Long, Product> productRepository;
-    private Long productIdSequence;
+    private Map<Integer, Product> productRepository;
+    private int productIdSequence;
 
-    public ProductRepository(HashMap productRepository, Long productIdSequence) {
+    public ProductRepository(HashMap productRepository, int productIdSequence) {
         this.productRepository = productRepository;
         this.productIdSequence = productIdSequence;
     }
 
-    public Map<Long, Product> getProductRepository() {
+    public Map<Integer, Product> getProductRepository() {
         return productRepository;
     }
 
@@ -23,7 +23,7 @@ public class ProductRepository {
         return product;
     }
 
-    public Product getProduct(Long id) {
+    public Product getProduct(int id) {
         return productRepository.get(id);
     }
 }
