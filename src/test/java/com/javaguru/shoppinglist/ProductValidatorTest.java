@@ -1,5 +1,6 @@
 package com.javaguru.shoppinglist;
 
+import com.javaguru.shoppinglist.repository.SqlRepository;
 import com.javaguru.shoppinglist.validator.ProductValidator;
 import com.javaguru.shoppinglist.validator.ValidationException;
 
@@ -10,18 +11,17 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductValidatorTest {
 
     @InjectMocks
-    private ProductValidator victim = new ProductValidator();
+    private ProductValidator victim;
 
     @Test
     public void nameLengthExpectTrue() {
@@ -52,18 +52,18 @@ public class ProductValidatorTest {
     }
 
     @Mock
-    ProductRepository productRepositoryMock;
+    SqlRepository sqlRepository;
+
+    @Mock
+    List<String> list;
 
     @Test(expected = ValidationException.class)
     public void validateNameUniqueExpectException() {
-        Map<Integer, Product> productRepository = new HashMap<>();
+        sqlRepository.getProductRepository().add("apple");
 
-        Product product = new Product();
-        product.setName("apple");
-        productRepository.put(0, product);
+        list.add("apple");
 
-        when(productRepositoryMock.getProductRepository()).thenReturn(productRepository);
-
-        victim.validateNameUnique("apple", productRepositoryMock);
+        when(sqlRepository.getProductRepository()).thenReturn(list);
+        victim.validateNameUnique("apple", sqlRepository);
     }
 }

@@ -17,7 +17,7 @@ public class Ui {
     private String enterPrice = "Enter product price (more than " + Product.PRICE_MIN + "): ";
     private String enterDiscount = "Enter product discount (" + Product.DISCOUNT_MIN + " to " + Product.DISCOUNT_MAX + ", decimals separated by comma, will not be set if the price is lower than " + Product.PRICE_MIN_FOR_DISCOUNT + "): ";
     private String enterId = "Enter product ID: ";
-    private String saveSuccess = "The product has been created. It's ID is ";
+    private String saveSuccess = "The product has been created. Its ID is ";
 
     public void messageActions() {
         for (String message : actions) {

@@ -1,7 +1,5 @@
 package com.javaguru.shoppinglist;
 
-import com.javaguru.shoppinglist.validator.ProductValidator;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -13,7 +11,6 @@ class ShoppingListApplication {
         ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
         Ui ui = context.getBean(Ui.class);
         ProductService productService = context.getBean(ProductService.class);
-        ProductValidator productValidator = context.getBean(ProductValidator.class);
         while (true) {
             ui.messageActions();
             Scanner scanner = new Scanner(System.in);

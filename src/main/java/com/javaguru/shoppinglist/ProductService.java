@@ -1,21 +1,22 @@
 package com.javaguru.shoppinglist;
 
+import com.javaguru.shoppinglist.repository.SqlRepository;
 import com.javaguru.shoppinglist.validator.ProductValidator;
 
 import java.math.BigDecimal;
 
 public class ProductService {
     private ProductValidator productValidator;
-    private ProductRepository productRepository;
+    private SqlRepository sqlRepository;
 
-    public ProductService(ProductValidator productValidator, ProductRepository productRepository) {
+    public ProductService(ProductValidator productValidator, SqlRepository sqlRepository) {
         this.productValidator = productValidator;
-        this.productRepository = productRepository;
+        this.sqlRepository = sqlRepository;
     }
 
     public void assignProductName(Product product, String name) {
         productValidator.validateNameLength(name);
-        productValidator.validateNameUnique(name, productRepository);
+        productValidator.validateNameUnique(name, sqlRepository);
         product.setName(name);
     }
 
@@ -40,11 +41,11 @@ public class ProductService {
     }
 
     public Product retrieveProduct(int id) {
-        return productRepository.getProduct(id);
+        return sqlRepository.getProduct(id);
     }
 
     public Product saveProduct(Product product) {
-        productRepository.saveProduct(product);
+        sqlRepository.saveProduct(product);
         return product;
     }
 }
