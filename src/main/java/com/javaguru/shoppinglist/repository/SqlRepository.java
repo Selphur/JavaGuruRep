@@ -22,7 +22,7 @@ public class SqlRepository {
     public SqlRepository(DataSource dataSource, JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.dataSource = dataSource;
-        String query = "CREATE TABLE IF NOT EXISTS product_test (" +
+        String query = "CREATE TABLE IF NOT EXISTS product (" +
                 "id INT PRIMARY KEY AUTO_INCREMENT," +
                 "name VARCHAR(" + Product.NAME_LENGTH_MAX + ")," +
                 "category VARCHAR(256)," +
