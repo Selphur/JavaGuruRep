@@ -39,7 +39,7 @@ public class ProductServiceTest {
         String name = "apple";
 
         when(productValidator.validateNameLength(name)).thenReturn(true);
-        when(productValidator.validateNameUnique(name, sqlRepository)).thenReturn(true);
+        when(productValidator.validateNameUnique(name)).thenReturn(true);
 
         victim.assignProductName(product, name);
 

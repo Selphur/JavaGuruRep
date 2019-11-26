@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -59,11 +60,10 @@ public class ProductValidatorTest {
 
     @Test(expected = ValidationException.class)
     public void validateNameUniqueExpectException() {
-        sqlRepository.getProductRepository().add("apple");
-
+        list = new ArrayList<>();
         list.add("apple");
 
         when(sqlRepository.getProductRepository()).thenReturn(list);
-        victim.validateNameUnique("apple", sqlRepository);
+        victim.validateNameUnique("apple");
     }
 }

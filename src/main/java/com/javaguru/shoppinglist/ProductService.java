@@ -16,7 +16,7 @@ public class ProductService {
 
     public void assignProductName(Product product, String name) {
         productValidator.validateNameLength(name);
-        productValidator.validateNameUnique(name, sqlRepository);
+        productValidator.validateNameUnique(name);
         product.setName(name);
     }
 

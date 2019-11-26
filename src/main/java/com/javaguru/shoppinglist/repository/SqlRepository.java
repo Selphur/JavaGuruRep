@@ -22,15 +22,6 @@ public class SqlRepository {
     public SqlRepository(DataSource dataSource, JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.dataSource = dataSource;
-        String query = "CREATE TABLE IF NOT EXISTS product (" +
-                "id INT PRIMARY KEY AUTO_INCREMENT," +
-                "name VARCHAR(" + Product.NAME_LENGTH_MAX + ")," +
-                "category VARCHAR(256)," +
-                "description VARCHAR(256)," +
-                "price DECIMAL(10,2)," +
-                "discount DECIMAL(10,2)" +
-                ")";
-        this.jdbcTemplate.update(query);
     }
 
     public Product saveProduct(Product product) {

@@ -7,6 +7,12 @@ import java.math.BigDecimal;
 
 public class ProductValidator {
 
+    private SqlRepository sqlRepository;
+
+    public ProductValidator(SqlRepository sqlRepository) {
+        this.sqlRepository = sqlRepository;
+    }
+
     public boolean validateNameLength(String name) {
         if (name.length() >= Product.NAME_LENGTH_MIN && name.length() <= Product.NAME_LENGTH_MAX) {
             return true;
@@ -39,13 +45,12 @@ public class ProductValidator {
         }
     }
 
-    public boolean validateNameUnique(String name, SqlRepository sqlRepository) {
-        boolean result = true;
+    public boolean validateNameUnique(String name) {
         for (String productName : sqlRepository.getProductRepository()) {
             if (name.equalsIgnoreCase(productName)) {
                 throw new ValidationException("Such a product already exists. The name must be unique. Please try again.");
             }
         }
-        return result;
+        return true;
     }
 }

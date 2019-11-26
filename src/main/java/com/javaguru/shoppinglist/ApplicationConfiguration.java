@@ -26,7 +26,7 @@ public class ApplicationConfiguration {
 
     @Bean
     public ProductValidator productValidator() {
-        return new ProductValidator();
+        return new ProductValidator(sqlRepository());
     }
 
     @Bean
