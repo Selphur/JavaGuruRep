@@ -1,11 +1,17 @@
 package com.javaguru.shoppinglist.validator;
 
 import com.javaguru.shoppinglist.Product;
-import com.javaguru.shoppinglist.ProductRepository;
+import com.javaguru.shoppinglist.repository.SqlRepository;
 
 import java.math.BigDecimal;
 
 public class ProductValidator {
+
+    private SqlRepository sqlRepository;
+
+    public ProductValidator(SqlRepository sqlRepository) {
+        this.sqlRepository = sqlRepository;
+    }
 
     public boolean validateNameLength(String name) {
         if (name.length() >= Product.NAME_LENGTH_MIN && name.length() <= Product.NAME_LENGTH_MAX) {
@@ -39,13 +45,12 @@ public class ProductValidator {
         }
     }
 
-    public boolean validateNameUnique(String name, ProductRepository productRepository) {
-        boolean result = true;
-        for (Product product : productRepository.getProductRepository().values()) {
-            if (name.equalsIgnoreCase(product.getName())) {
+    public boolean validateNameUnique(String name) {
+        for (String productName : sqlRepository.getProductRepository()) {
+            if (name.equalsIgnoreCase(productName)) {
                 throw new ValidationException("Such a product already exists. The name must be unique. Please try again.");
             }
         }
-        return result;
+        return true;
     }
 }

@@ -1,5 +1,6 @@
 package com.javaguru.shoppinglist;
 
+import com.javaguru.shoppinglist.repository.SqlRepository;
 import com.javaguru.shoppinglist.validator.ProductValidator;
 
 import org.junit.Test;
@@ -10,23 +11,21 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static junit.framework.TestCase.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceTest {
 
     @InjectMocks
-    private ProductService victim = new ProductService(new ProductValidator(), new ProductRepository(new HashMap<>(), 0));
+    private ProductService victim;
 
     @Mock
     ProductValidator productValidator;
 
     @Mock
-    ProductRepository productRepository;
+    SqlRepository sqlRepository;
 
     @Spy
     Product product;
@@ -40,7 +39,7 @@ public class ProductServiceTest {
         String name = "apple";
 
         when(productValidator.validateNameLength(name)).thenReturn(true);
-        when(productValidator.validateNameUnique(name, productRepository)).thenReturn(true);
+        when(productValidator.validateNameUnique(name)).thenReturn(true);
 
         victim.assignProductName(product, name);
 
@@ -51,22 +50,23 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void setProductPriceExpectNull() {
+    public void setProductPriceExpectSet() {
         BigDecimal price = new BigDecimal(1);
 
-        when(productValidator.validatePrice(price)).thenReturn(false);
+        when(productValidator.validatePrice(price)).thenReturn(true);
 
         victim.assignProductPrice(product, price);
 
         BigDecimal result = product.getPrice();
 
-        assertNull(result);
+        assertNotNull(result);
     }
 
     @Test
     public void setProductDiscountExpectNotNull() {
-        BigDecimal discount = new BigDecimal(105);
+        BigDecimal discount = new BigDecimal(10);
 
+        when(productValidator.validatePriceMinForDiscount(product.getPrice())).thenReturn(true);
         when(productValidator.validateDiscount(discount)).thenReturn(true);
 
         victim.assignProductDiscount(product, discount);
