@@ -5,6 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.util.Scanner;
 
+
 class ShoppingListApplication {
 
     public static void main(String[] args) {
